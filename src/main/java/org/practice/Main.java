@@ -27,8 +27,7 @@ public class Main {
 
             while (true) {
                 printMenu();
-                System.out.print("\uD83D\uDC49 ");
-                String command = scanner.nextLine().toLowerCase().trim();
+                String command = readString("\uD83D\uDC49 ");
 
                 switch (command) {
                     case "a" -> printAllStudents(classroom);
@@ -61,11 +60,18 @@ public class Main {
             """);
     }
 
-    private void updateStudentScoreById(Classroom classroom) {
-        System.out.print("점수를 수정할 학생 ID: ");
-        int id = scanner.nextInt();
-        scanner.nextLine();
+    private int readInt(String message) {
+        System.out.print(message);
+        return Integer.parseInt(scanner.nextLine());
+    }
 
+    private String readString(String message) {
+        System.out.print(message);
+        return scanner.nextLine().trim();
+    }
+
+    private void updateStudentScoreById(Classroom classroom) {
+        int id = readInt("점수를 수정할 학생 ID: ");
         Optional<Student> target = classroom.findById(id);
 
         if (target.isEmpty()) {
@@ -73,10 +79,7 @@ public class Main {
             return;
         }
 
-        System.out.print("점수: ");
-        int score = scanner.nextInt();
-        scanner.nextLine();
-
+        int score = readInt("점수: ");
         target.get().updateScore(score);
         System.out.println("✅ 점수를 수정했습니다.");
     }
@@ -101,8 +104,7 @@ public class Main {
     }
 
     private void printStudentByNameKeyword(Classroom classroom) {
-        System.out.print("학생 이름: ");
-        String keyword = scanner.nextLine().trim();
+        String keyword = readString("학생 이름: ");
         List<Student> targets = classroom.searchByName(keyword);
 
         if (targets.isEmpty()) {
