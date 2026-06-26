@@ -39,6 +39,6 @@ public class Classroom {
     }
 
     public List<Student> searchByName(String name) {
-        return students.stream().filter(s -> s.getName().equals(name)).toList();
+        return students.stream().filter(s -> s.getName().contains(name)).toList();
     }
 }

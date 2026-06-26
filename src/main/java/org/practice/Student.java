@@ -35,7 +35,7 @@ public class Student {
     }
 
     public PassStatus getPassStatus() {
-        return score >= 60 ? PassStatus.PASSED : PassStatus.FAILED;
+        return score >= 70 ? PassStatus.PASSED : PassStatus.FAILED;
     }
 
     @Override
