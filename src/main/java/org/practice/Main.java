@@ -16,16 +16,25 @@ public class Main {
     }
 
     public void run() {
+        Classroom classroom = new Classroom();
+        classroom.addStudent(new Student(1, "김하나", 87));
+        classroom.addStudent(new Student(2, "이도윤", 92));
+        classroom.addStudent(new Student(3, "박서준", 58));
+        classroom.addStudent(new Student(4, "정다은", 75));
+        printAllStudents(classroom);
+
         try {
-            Classroom classroom = new Classroom();
-            classroom.addStudent(new Student(1, "김하나", 87));
-            classroom.addStudent(new Student(2, "이도윤", 92));
-            classroom.addStudent(new Student(3, "박서준", 58));
-            classroom.addStudent(new Student(4, "정다은", 75));
+            manageClassroom(classroom);
+        } catch(Exception e) {
+            System.out.println("❌ " + e.getMessage());
+        } finally {
+            scanner.close();
+        }
+    }
 
-            printAllStudents(classroom);
-
-            while (true) {
+    private void manageClassroom(Classroom classroom) {
+        while (true) {
+            try {
                 printMenu();
                 String command = readString("\uD83D\uDC49 ");
 
@@ -40,11 +49,9 @@ public class Main {
                     }
                     default -> System.out.println("⚠️ 존재하지 않는 명령어입니다.");
                 }
+            } catch (IllegalArgumentException e) {
+                System.out.println("❌ " + e.getMessage());
             }
-        } catch(IllegalArgumentException e) {
-            System.out.println("❌ " + e.getMessage());
-        } finally {
-            scanner.close();
         }
     }
 
